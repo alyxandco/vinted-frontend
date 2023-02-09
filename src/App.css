@@ -1,14 +1,21 @@
 body {
-  /* height: 100%;
-  width: 100%; */
+  max-height: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   /* align-items: center; */
-
   font-family: Maison Neue, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: #000000;
+  text-decoration: none;
 }
 
 /* nav {
@@ -34,30 +41,46 @@ body {
   height: 40px;
 }
 
-input {
+header input {
   background-color: #f5f6f7;
   border: none;
   border-radius: 5px;
   /* font-family: Maison Neue; */
   font-size: 16px;
   height: 37px;
-  /* outline: none; */
+  outline: none;
   margin-left: 40px;
   padding-left: 10px;
   width: 590px;
 }
 
-.signin {
+.signup,
+.signout {
   margin-right: 20px;
 }
 
-.signin,
+.button-hidden {
+  visibility: hidden;
+}
+
+.signup,
 .login {
   height: 30px;
   width: 115px;
   background-color: #fff;
   color: #2cb1ba;
   border: solid 1px #007580;
+  border-radius: 5px;
+  /* font-family: Maison Neue; */
+  font-size: 12px;
+}
+
+.signout {
+  height: 30px;
+  width: 115px;
+  background-color: #c2175b;
+  color: #ffffff;
+  border: solid 1px #c2175b;
   border-radius: 5px;
   /* font-family: Maison Neue; */
   font-size: 12px;
@@ -75,19 +98,29 @@ input {
 }
 
 /* ------------------------*/
-/* ----- xx main xx ---- */
+/* ----- xx HOME xx ----- */
 /* ------------------------*/
-
-main {
-}
 
 /* ----- xx Banner xx ---- */
 
-.megabanner-container img {
+.megabanner-container {
+  /* background-color: #9b1b1b; */
+  height: 450px;
+  width: 100vw;
+  margin: 0 auto;
+}
+.megabanner-image {
   height: 450px;
   object-fit: cover;
   position: relative;
   width: 100%;
+}
+
+.megabanner-image-overlay {
+  height: 80px;
+  position: absolute;
+  top: 445px;
+  right: 0px;
 }
 
 .homeBaseline {
@@ -100,8 +133,8 @@ main {
   justify-content: center;
   padding: 30px;
   position: absolute;
-  top: 200px;
-  left: 250px;
+  top: 150px;
+  left: 320px;
   width: 350px;
 }
 
@@ -117,21 +150,23 @@ main {
   margin-top: 32px;
 }
 
-/* ----- xx Banner xx ---- */
+/* ----- xx cards xx ---- */
 
 .image-main-container {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   /* background-color: #f09494; */
   height: 100%;
   width: 1280px;
+  margin: 0 auto;
 }
 
 .image-single-container {
-  padding: 0 6px 16px;
-  width: 235px;
+  padding: 0 3px 16px;
+  width: 230px;
   margin: 10px 10px;
 }
 
@@ -143,6 +178,10 @@ main {
   color: grey;
 }
 
+.avatar-username {
+  display: flex;
+}
+
 .product-image img {
   height: 360px;
   object-fit: cover;
@@ -150,5 +189,125 @@ main {
 }
 
 .product-price {
+  padding-top: 10px;
+  padding-bottom: 5px;
   font-size: 14px;
+}
+
+.product-details {
+  font-size: 12px;
+  color: grey;
+}
+
+/* ------------------------*/
+/* ----- xx OFFER xx ---- */
+/* ------------------------*/
+
+.offer-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ebedee;
+  padding-top: 30px;
+}
+
+.offer-container img {
+  width: 400px;
+  height: 600px;
+}
+
+.offer-text-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+  background-color: #fff;
+  width: 320px;
+  height: 520px;
+  padding: 40px;
+}
+
+/* ------------------------*/
+/* ----- xx SIGNUP xx ----- */
+/* ------------------------*/
+
+.signup-container {
+  width: 1280px;
+  height: 100vp;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+}
+
+.signup-container form {
+  /* background-color: #f09494; */
+  width: 300px;
+  text-align: center;
+  margin: 30px;
+}
+
+.signup-container input {
+  width: 80%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #fcced3;
+  margin-bottom: 20px;
+  font-size: 16px;
+  height: 37px;
+  /* color: lightgrey; */
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 16px;
+  color: grey;
+}
+
+.newsletter-checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+  gap: 10px;
+}
+
+.newsletter-checkbox-container input {
+  width: 30px;
+  margin-right: 20px;
+  outline: none;
+  /* appearance: auto; */
+  /* box-sizing: border-box; */
+  margin: 3px 3px 3px 4px;
+  border: solid 3px black;
+}
+
+.newsletter-checkbox-text {
+  font-size: 12px;
+  color: grey;
+}
+
+.newsletter-checkbox-login {
+  line-height: 40px;
+  font-size: 12px;
+  color: #007580;
+}
+
+.signup-button {
+  height: 40px;
+  width: 180px;
+  background-color: #007580;
+  color: #ffffff;
+  border: none;
+  /* margin-left: 50px; */
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 32px;
 }

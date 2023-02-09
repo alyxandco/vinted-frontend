@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 //import du package axios
 import axios from "axios";
 
 import bannerwide from "../components/assets/images/bannerwide.jpg";
+import tear from "../components/assets/images/tear.svg";
 
 const Home = () => {
   const [data, setData] = useState();
@@ -19,7 +21,7 @@ const Home = () => {
         const response = await axios.get(
           "https://lereacteur-vinted-api.herokuapp.com/offers"
         );
-        // console.log(response.data);
+        console.log(response.data);
         // Je stocke le résultat dans data
         setData(response.data);
         // Je fais paser isLoading à false
@@ -34,11 +36,20 @@ const Home = () => {
 
   // Tant que isLoading vaut true, j'affiche un indicateur de chargement
   return isLoading ? (
-    <p>Loading ...</p>
+    <p>Loading ...🔥🔥🔥</p>
   ) : (
     <main>
       <div className="megabanner-container">
-        <img alt="Vinted megabanner" src={bannerwide} />
+        <img
+          className="megabanner-image"
+          alt="Vinted megabanner"
+          src={bannerwide}
+        />
+        <img
+          className="megabanner-image-overlay"
+          alt="tear overlay"
+          src={tear}
+        />
       </div>
       <div className="homeBaseline">
         Prêts à faire du tri dans vos placards ?
@@ -48,19 +59,35 @@ const Home = () => {
         {data.offers.map((offer) => {
           console.log("offer : ", offer);
           return (
-            <div className="image-single-container" key={offer._id}>
-              <div className="username">{offer.owner.account.username}</div>
-              <div className="product-image">
-                <img
-                  className="product-price"
-                  alt={offer.product_name}
-                  src={offer.product_image.url}
-                />
+            <Link to={`/offer/${offer._id}`}>
+              <div className="image-single-container" key={offer._id}>
+                <div className="avatar-username">
+                  {offer.owner.account.avatar && (
+                    <img
+                      style={{
+                        borderRadius: "50%",
+                        height: 25,
+                        width: 25,
+                        objectFit: "cover",
+                      }}
+                      src={offer.owner.account.avatar.secure_url}
+                    />
+                  )}
+
+                  <div className="username">{offer.owner.account.username}</div>
+                </div>
+                <div className="product-image">
+                  <img alt={offer.product_name} src={offer.product_image.url} />
+                </div>
+                <div className="product-price">{offer.product_price} €</div>
+                <div className="product-details">
+                  {offer.product_details[1].TAILLE}
+                </div>
+                <div className="product-details">
+                  {offer.product_details[0].MARQUE}
+                </div>
               </div>
-              <div>{offer.product_price} €</div>
-              <div>{offer.product_details.TAILLE}</div>
-              <div>{offer.product_details.MARQUE}</div>
-            </div>
+            </Link>
           );
         })}
       </section>
