@@ -1,50 +1,53 @@
 import axios from "axios";
 import { useState } from "react";
-import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ handleToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState();
   const [errorMessage, setErrorMessage] = useState("");
-  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    //   console.log(email, password);
+    setErrorMessage("");
+    try {
+      const data = {
+        email: email,
+        password: password,
+      };
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/user/login",
+        data
+      );
+      console.log(response.data);
+      if (response.data.token) {
+        //   const cookieToken = response.data.token;
+        handleToken(response.data.token);
+        console.log("cookie : ", response.data.token);
+        // J'affiche une alerte
+        alert(`connecté`);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      if (error.response.data.message === "User not found") {
+        setErrorMessage("Utilisateur et/ou mot de passe inconnu");
+        alert(`Utilisateur et/ou mot de passe inconnu`);
+      }
+      if (error.response.data.error === "Unauthorized") {
+        setErrorMessage("Utilisateur et/ou mot de passe incorrect");
+        alert(`Utilisateur et/ou mot de passe incorrect`);
+      }
+    }
+  };
+
   return (
     <div className="signup-container">
       <h1>Se connecter</h1>
-      <form
-        onSubmit={async (event) => {
-          event.preventDefault();
-          //   console.log(email, password);
-          try {
-            const data = {
-              email: email,
-              password: password,
-            };
-            const result = await axios.post(
-              "https://lereacteur-vinted-api.herokuapp.com/user/login",
-              data
-            );
-            console.log(result.data.token);
-            if (result.data.token) {
-              const cookieToken = result.data.token;
-              setToken(result.data.token);
-              Cookies.set("token", cookieToken, { expires: 7 });
-              console.log("cookie : ", cookieToken);
-              setMessage("");
-              // J'affiche une alerte
-              alert(`connecté`);
-            }
-            if (!result.data.token) {
-              setErrorMessage("");
-              // J'affiche une alerte
-              alert(`enregisconnexion impossible`);
-              // Sinon
-            }
-          } catch (error) {
-            console.log(error.response);
-          }
-        }}
-      >
+      <form onSubmit={handleLogin}>
         <input
           id="email"
           placeholder="Email"
@@ -68,9 +71,12 @@ const Login = () => {
         <button className="signup-button" type="submit">
           Se connecter
         </button>
-        <p className="newsletter-checkbox-login">
-          Pas encore de compte ? inscris-toi !
-        </p>
+        <Link to="/Signup">
+          <p className="newsletter-checkbox-login">
+            {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+            Pas encore de compte ? inscris-toi !
+          </p>
+        </Link>
       </form>
     </div>
   );

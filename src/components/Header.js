@@ -1,8 +1,8 @@
 import vintedlogo from "./assets/images/vintedlogo.svg";
-
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Header = () => {
+const Header = ({ handleToken, token, search, setSearch }) => {
   return (
     <header className="header-container">
       <div className="headerzone1">
@@ -13,16 +13,29 @@ const Header = () => {
           type="text"
           name="Search"
           placeholder="🔍  Recherche des articles"
+          onChange={(event) => setSearch(event.target.value)}
         />
       </div>
-      {}
       <div className="headerzone2">
-        <Link to="/Signup">
-          <button className="signup">S'inscrire</button>
-        </Link>
-        <Link to="/Login">
-          <button className="login button-hidden">Se connecter</button>
-        </Link>
+        {token ? (
+          <button
+            className="signout"
+            onClick={() => {
+              handleToken(null);
+            }}
+          >
+            Se déconnecter
+          </button>
+        ) : (
+          <>
+            <Link to="/Signup">
+              <button className="signup">S'inscrire</button>
+            </Link>
+            <Link to="/Login">
+              <button className="login">Se connecter</button>
+            </Link>
+          </>
+        )}
         <button className="sell">Vends tes articles</button>
       </div>
     </header>

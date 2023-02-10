@@ -18,12 +18,6 @@ a:active {
   text-decoration: none;
 }
 
-/* nav {
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 30px;
-} */
-
 /* ------------------------*/
 /* ----- xx header xx ---- */
 /* ------------------------*/
@@ -134,7 +128,7 @@ header input {
   padding: 30px;
   position: absolute;
   top: 150px;
-  left: 320px;
+  left: 330px;
   width: 350px;
 }
 
@@ -210,6 +204,7 @@ header input {
   height: 100vh;
   background-color: #ebedee;
   padding-top: 30px;
+  gap: 30px;
 }
 
 .offer-container img {
@@ -267,6 +262,12 @@ h1 {
 h3 {
   font-size: 16px;
   color: grey;
+}
+
+.errorMessage {
+  line-height: 30px;
+  color: red;
+  font-size: 14px;
 }
 
 .newsletter-checkbox-container {

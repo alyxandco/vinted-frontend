@@ -1,54 +1,58 @@
 import axios from "axios";
 import { useState } from "react";
-import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({ handleToken }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkedNewsletter, setCheckedNewsletter] = useState(false);
-  const [token, setToken] = useState();
   const [errorMessage, setErrorMessage] = useState("");
-  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    //   console.log(name, email, password, checkedNewsletter);
+    //   Je fais disparaitre le message d'erreur
+    setErrorMessage("");
+    try {
+      const data = {
+        email: email,
+        username: name,
+        password: password,
+        newsletter: checkedNewsletter,
+      };
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+        data
+      );
+      // console.log(result.data.token);
+      if (response.data.token) {
+        handleToken(response.data.token);
+        navigate("/");
+        // J'affiche une alerte
+        alert(`Compte enregistré !`);
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      if (error.response.data.message === "This email already has an account") {
+        setErrorMessage(
+          "Cet email est déjà utilisé, veuillez créer un compte avec un Email valide."
+        );
+        alert(`Email déjà utilisé, merci d'utiliser un Email valide.`);
+      }
+      if (error.response.data.message === "Missing parameters") {
+        setErrorMessage("Merci de remplir tous les champs obligatoires");
+        alert(`Merci de remplir tous les champs obligatoires`);
+      }
+    }
+  };
+
   return (
     <div className="signup-container">
       <h1>S'inscrire</h1>
-      <form
-        onSubmit={async (event) => {
-          event.preventDefault();
-          //   console.log(name, email, password, checkedNewsletter);
-          try {
-            const data = {
-              email: email,
-              username: name,
-              password: password,
-              newsletter: checkedNewsletter,
-            };
-            const result = await axios.post(
-              "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-              data
-            );
-            // console.log(result.data.token);
-            if (result.data.token) {
-              const cookieToken = result.data.token;
-              setToken(result.data.token);
-              Cookies.set("token", cookieToken, { expires: 7 });
-              console.log(cookieToken);
-              setMessage("");
-              // J'affiche une alerte
-              alert(`succès`);
-            }
-            if (!result.data.token) {
-              setErrorMessage("");
-              // J'affiche une alerte
-              alert(`enregistrement impossible`);
-              // Sinon
-            }
-          } catch (error) {
-            console.log(error.response);
-          }
-        }}
-      >
+      <form onSubmit={handleSignup}>
         <input
           id="name"
           placeholder="Nom d'utilisateur"
@@ -61,7 +65,7 @@ const Signup = () => {
         />
         <input
           id="email"
-          placeholder="Email"
+          placeholder="Email *"
           type="email"
           name="email"
           value={email}
@@ -71,7 +75,7 @@ const Signup = () => {
         />
         <input
           id="password"
-          placeholder="Mot de passe"
+          placeholder="Mot de passe *"
           type="password"
           name="password"
           value={password}
@@ -85,9 +89,9 @@ const Signup = () => {
               id="newsletter"
               type="checkbox"
               name="newsletter"
-              value={checkedNewsletter}
+              checked={checkedNewsletter}
               onChange={(event) => {
-                setCheckedNewsletter(true);
+                setCheckedNewsletter(!checkedNewsletter);
               }}
             />
           </div>
@@ -103,9 +107,12 @@ const Signup = () => {
         <button className="signup-button" type="submit">
           S'inscrire
         </button>
-        <p className="newsletter-checkbox-login">
-          Tu as déjà un compte ? Connecte-toi !
-        </p>
+        {errorMessage && <p className="errorMessage">{errorMessage} </p>}
+        <Link to="/Login">
+          <p className="newsletter-checkbox-login">
+            Tu as déjà un compte ? Connecte-toi !
+          </p>
+        </Link>
       </form>
     </div>
   );

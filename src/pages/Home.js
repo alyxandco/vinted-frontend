@@ -7,7 +7,7 @@ import axios from "axios";
 import bannerwide from "../components/assets/images/bannerwide.jpg";
 import tear from "../components/assets/images/tear.svg";
 
-const Home = () => {
+const Home = ({ search, setSearch }) => {
   const [data, setData] = useState();
   // State qui me sert à savoir si la data a été récupérée
   const [isLoading, setIsLoading] = useState(true);
@@ -19,9 +19,9 @@ const Home = () => {
       // Ma requête peut échouer docn je la place dans un try catch
       try {
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
+          `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         // Je stocke le résultat dans data
         setData(response.data);
         // Je fais paser isLoading à false
@@ -32,7 +32,7 @@ const Home = () => {
     };
     // J'appelle ma fonction
     fetchData();
-  }, []);
+  }, [search]);
 
   // Tant que isLoading vaut true, j'affiche un indicateur de chargement
   return isLoading ? (
@@ -57,13 +57,14 @@ const Home = () => {
       </div>
       <section className="image-main-container">
         {data.offers.map((offer) => {
-          console.log("offer : ", offer);
+          // console.log("offer : ", offer);
           return (
             <Link to={`/offer/${offer._id}`}>
               <div className="image-single-container" key={offer._id}>
                 <div className="avatar-username">
                   {offer.owner.account.avatar && (
                     <img
+                      alt={offer.owner.account.username}
                       style={{
                         borderRadius: "50%",
                         height: 25,

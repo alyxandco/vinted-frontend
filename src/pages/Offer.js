@@ -18,7 +18,7 @@ const Offer = () => {
         );
         setData(response.data);
         setIsLoading(false);
-        console.log("response.data : ", response.data);
+        // console.log("response.data : ", response.data);
       } catch (error) {
         console.log(error.message);
       }
@@ -30,7 +30,11 @@ const Offer = () => {
     <p>Loading...🔥🔥🔥</p>
   ) : (
     <div className="offer-container">
-      <img className="offer-image" alt="" src={data.product_image.secure_url} />
+      <img
+        alt={data.product_name}
+        className="offer-image"
+        src={data.product_image.secure_url}
+      />
       <div className="offer-text-container">
         <p>{data.product_price} €</p>
         {/* Je parcours product_details */}
@@ -54,6 +58,7 @@ const Offer = () => {
           <div>
             {data.owner.account.avatar && (
               <img
+                alt={data.owner.account.username}
                 style={{
                   borderRadius: "50%",
                   height: 25,
