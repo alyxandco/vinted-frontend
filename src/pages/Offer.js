@@ -27,7 +27,7 @@ const Offer = () => {
   }, [id]);
 
   return isLoading ? (
-    <p>Loading...🔥🔥🔥</p>
+    <p>Loading 🔥🔥🔥...</p>
   ) : (
     <div className="offer-container">
       <img
@@ -36,40 +36,43 @@ const Offer = () => {
         src={data.product_image.secure_url}
       />
       <div className="offer-text-container">
-        <p>{data.product_price} €</p>
+        <p className="offer-price">{data.product_price} €</p>
         {/* Je parcours product_details */}
         {data.product_details.map((detail, index) => {
-          // Je récupère le nomde la clef de detail
+          // Je récupère le nom de la clef de detail
           const key = Object.keys(detail)[0];
           // console.log(key);
           // console.log(detail[key]);
           return (
-            <div key={index}>
-              {/* J'affiche le nom dela clef  */}
-              <span>{key} : </span>
-              {/* et son contenu */}
-              <span>{detail[key]}</span>
-            </div>
+            <>
+              <div className="offer-detail-main" key={index}>
+                {/* J'affiche le nom dela clef  */}
+                <span className="offer-key">{key} : </span>
+                {/* et son contenu */}
+                <span className="offer-detail">{detail[key]}</span>
+              </div>
+            </>
           );
         })}
-        <p>{data.product_name}</p>
-        <p>{data.product_description}</p>
+        <p className="offer-line">&nbsp;</p>
+        <p className="offer-name">{data.product_name}</p>
+        <p className="offer-description">{data.product_description}</p>
         <div>
-          <div>
+          <div className="offer-avatar-username">
             {data.owner.account.avatar && (
               <img
                 alt={data.owner.account.username}
                 style={{
                   borderRadius: "50%",
-                  height: 25,
-                  width: 25,
+                  height: 50,
+                  width: 50,
                   objectFit: "cover",
                 }}
                 src={data.owner.account.avatar.secure_url}
               />
             )}
+            <p>{data.owner.account.username}</p>
           </div>
-          <p>{data.owner.account.username}</p>
         </div>
 
         <button className="sell-homebaseline">Acheter</button>

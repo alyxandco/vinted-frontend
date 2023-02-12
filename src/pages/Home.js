@@ -7,19 +7,26 @@ import axios from "axios";
 import bannerwide from "../components/assets/images/bannerwide.jpg";
 import tear from "../components/assets/images/tear.svg";
 
-const Home = ({ search, setSearch }) => {
+const Home = ({ search, setSearch, checked, setChecked }) => {
   const [data, setData] = useState();
   // State qui me sert à savoir si la data a été récupérée
   const [isLoading, setIsLoading] = useState(true);
-
+  let priceSort = "";
+  if (checked) {
+    priceSort = "price-desc";
+  }
+  if (!checked) {
+    priceSort = "price-asc";
+  }
+  console.log(priceSort);
   // La callback de mon useEffect va être appelée une seule fois au premier rendu de mon composant
   useEffect(() => {
-    // Je déclare la focntion qui fait la requête
+    // Je déclare la fonction qui fait la requête
     const fetchData = async () => {
-      // Ma requête peut échouer docn je la place dans un try catch
+      // Ma requête peut échouer donc je la place dans un try catch
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}`
+          `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}&sort=${priceSort}`
         );
         // console.log(response.data);
         // Je stocke le résultat dans data
@@ -32,11 +39,11 @@ const Home = ({ search, setSearch }) => {
     };
     // J'appelle ma fonction
     fetchData();
-  }, [search]);
+  }, [search, checked, priceSort]);
 
   // Tant que isLoading vaut true, j'affiche un indicateur de chargement
   return isLoading ? (
-    <p>Loading ...🔥🔥🔥</p>
+    <p>Loading 🔥🔥🔥...</p>
   ) : (
     <main>
       <div className="megabanner-container">

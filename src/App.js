@@ -18,6 +18,7 @@ function App() {
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("token-vinted") || null);
   const [search, setSearch] = useState("");
+  const [checked, setChecked] = useState(true);
   console.log(search);
   // fonction pour stocker OU suppr le token dans le state + cookie
   const handleToken = (token) => {
@@ -38,11 +39,21 @@ function App() {
         token={token}
         search={search}
         setSearch={setSearch}
+        checked={checked}
+        setChecked={setChecked}
       />
       <Routes>
         <Route
           path="/"
-          element={<Home token={token} search={search} setSearch={setSearch} />}
+          element={
+            <Home
+              token={token}
+              search={search}
+              setSearch={setSearch}
+              checked={checked}
+              setChecked={setChecked}
+            />
+          }
         />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/Signup/" element={<Signup handleToken={handleToken} />} />
