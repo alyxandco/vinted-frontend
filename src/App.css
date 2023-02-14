@@ -8,6 +8,7 @@ body {
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
 a:link,
@@ -361,6 +362,123 @@ h3 {
   border-radius: 5px;
   font-size: 16px;
   margin-top: 32px;
+}
+
+/* ------------------------*/
+/* ----- xx PUBLISH xx ----- */
+/* ------------------------*/
+
+.publish-container {
+  background-color: #ebedee;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 16px;
+  /* margin: 0 auto; */
+}
+
+article {
+  width: 100%;
+  border-bottom: 1px solid rgb(210, 211, 212);
+  display: flex;
+  justify-content: space-between;
+}
+
+article input {
+  width: 650px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 20px;
+  font-size: 16px;
+  height: 37px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  color: #007580;
+  border: 1px solid #007580;
+  display: inline-block;
+  padding: 12px 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+article textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.publish-container-section {
+  display: flex;
+  flex-direction: column;
+  width: 1240px;
+  border: 1px solid lightgrey;
+  background-color: #ffffff;
+  margin: 20px;
+  padding: 19px;
+  gap: 40px;
+}
+
+.publish-container h1 {
+  width: 1280px;
+}
+
+.first-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offerToPublishImage {
+  width: 300px;
+}
+
+.second-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.publish-button {
+  height: 40px;
+  width: 130px;
+  background-color: #007580;
+  color: #ffffff;
+  border: none;
+  margin-left: 50px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 32px;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 1280px; */
+}
+
+article h3 {
+  border: solid 1px black;
+  /* width: 650px; */
+}
+
+.fifth-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
 }
 
 /* ------------------------*/

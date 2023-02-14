@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+
+import Payment from "./Payment";
 
 const Offer = () => {
   const [data, setData] = useState();
@@ -44,14 +46,14 @@ const Offer = () => {
           // console.log(key);
           // console.log(detail[key]);
           return (
-            <>
-              <div className="offer-detail-main" key={index}>
+            <div key={index}>
+              <div className="offer-detail-main">
                 {/* J'affiche le nom dela clef  */}
                 <span className="offer-key">{key} : </span>
                 {/* et son contenu */}
                 <span className="offer-detail">{detail[key]}</span>
               </div>
-            </>
+            </div>
           );
         })}
         <p className="offer-line">&nbsp;</p>
@@ -74,8 +76,12 @@ const Offer = () => {
             <p>{data.owner.account.username}</p>
           </div>
         </div>
-
-        <button className="sell-homebaseline">Acheter</button>
+        <Link
+          to="/payment"
+          state={{ title: data.product_name, price: data.product_price * 100 }}
+        >
+          <button className="sell-homebaseline">Acheter</button>
+        </Link>
       </div>
     </div>
   );

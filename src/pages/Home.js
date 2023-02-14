@@ -7,7 +7,7 @@ import axios from "axios";
 import bannerwide from "../components/assets/images/bannerwide.jpg";
 import tear from "../components/assets/images/tear.svg";
 
-const Home = ({ search, setSearch, checked, setChecked }) => {
+const Home = ({ search, setSearch, checked, setChecked, token }) => {
   const [data, setData] = useState();
   // State qui me sert à savoir si la data a été récupérée
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +18,7 @@ const Home = ({ search, setSearch, checked, setChecked }) => {
   if (!checked) {
     priceSort = "price-asc";
   }
-  console.log(priceSort);
+  // console.log(priceSort);
   // La callback de mon useEffect va être appelée une seule fois au premier rendu de mon composant
   useEffect(() => {
     // Je déclare la fonction qui fait la requête
@@ -60,15 +60,23 @@ const Home = ({ search, setSearch, checked, setChecked }) => {
       </div>
       <div className="homeBaseline">
         Prêts à faire du tri dans vos placards ?
-        <button className="sell-homebaseline">Commencer à vendre</button>
+        {token ? (
+          <Link to="/Publish">
+            <button className="sell-homebaseline">Commencer à vendre</button>
+          </Link>
+        ) : (
+          <Link to="/Login">
+            <button className="sell-homebaseline">Commencer à vendre</button>
+          </Link>
+        )}
       </div>
       <section className="image-main-container">
-        {data.offers.map((offer) => {
+        {data.offers.map((offer, index) => {
           // console.log("offer : ", offer);
           return (
-            <Link to={`/offer/${offer._id}`}>
-              <div className="image-single-container" key={offer._id}>
-                <div className="avatar-username">
+            <Link to={`/offer/${offer._id}`} key={offer._id}>
+              <div className="image-single-container">
+                <div key={index} className="avatar-username">
                   {offer.owner.account.avatar && (
                     <img
                       alt={offer.owner.account.username}

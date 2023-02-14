@@ -1,5 +1,5 @@
 import vintedlogo from "./assets/images/vintedlogo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Toggle from "react-toggle";
 import { HiArrowUp } from "react-icons/hi";
 import { HiArrowDown } from "react-icons/hi";
@@ -13,6 +13,8 @@ const Header = ({
   checked,
   setChecked,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <header className="header-container">
       <div className="headerzone1">
@@ -23,13 +25,15 @@ const Header = ({
           <input
             type="text"
             name="Search"
+            value={search}
             placeholder="🔍  Recherche des articles"
             onChange={(event) => setSearch(event.target.value)}
-          />{" "}
+          />
           <div className="header-price">
             <label>Trier par prix :</label>
             <Toggle
               className="react-toggle-track"
+              // value={checked}
               icons={{
                 checked: <HiArrowUp />,
                 unchecked: <HiArrowDown />,
@@ -48,6 +52,7 @@ const Header = ({
             className="signout"
             onClick={() => {
               handleToken(null);
+              navigate("/Login");
             }}
           >
             Se déconnecter
@@ -62,7 +67,15 @@ const Header = ({
             </Link>
           </>
         )}
-        <button className="sell">Vends tes articles</button>
+        {token ? (
+          <Link to="/Publish">
+            <button className="sell">Vends tes articles</button>
+          </Link>
+        ) : (
+          <Link to="/Login">
+            <button className="sell">Vends tes articles</button>
+          </Link>
+        )}
       </div>
     </header>
   );

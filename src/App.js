@@ -11,6 +11,9 @@ import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Publish from "./pages/Publish";
+import Payment from "./pages/Payment";
+// import CheckoutForm from "./pages/CheckoutForm";
 
 function App() {
   // State dans lequel je stocke le token. Sa valeur de base sera :
@@ -19,7 +22,7 @@ function App() {
   const [token, setToken] = useState(Cookies.get("token-vinted") || null);
   const [search, setSearch] = useState("");
   const [checked, setChecked] = useState(true);
-  console.log(search);
+  console.log(token);
   // fonction pour stocker OU suppr le token dans le state + cookie
   const handleToken = (token) => {
     if (token) {
@@ -58,6 +61,11 @@ function App() {
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/Signup/" element={<Signup handleToken={handleToken} />} />
         <Route path="/Login/" element={<Login handleToken={handleToken} />} />
+        <Route
+          path="/Publish"
+          element={<Publish handleToken={handleToken} token={token} />}
+        />
+        <Route path="/Payment/" element={<Payment />} />
       </Routes>
     </Router>
   );
