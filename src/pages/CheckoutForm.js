@@ -2,7 +2,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useState } from "react";
 
-const CheckoutForm = ({ price, title }) => {
+const CheckoutForm = ({ price, title, name }) => {
   const stripe = useStripe();
 
   const elements = useElements();
@@ -13,13 +13,14 @@ const CheckoutForm = ({ price, title }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setIsLoading(true);
       // On récupère ici les données bancaires que l'utilisateur rentre
       const cardElement = elements.getElement(CardElement);
 
       // Demande de création d'un token via l'API Stripe
       // On envoie les données bancaires dans la requête
       const stripeResponse = await stripe.createToken(cardElement, {
-        name: "Alex B",
+        name: name,
       });
       console.log(stripeResponse);
       const stripeToken = stripeResponse.token.id;
@@ -30,13 +31,14 @@ const CheckoutForm = ({ price, title }) => {
         "https://lereacteur-vinted-api.herokuapp.com/payment",
         {
           token: stripeToken,
-          title: { title },
-          amount: { price },
+          title: title,
+          amount: price,
         }
       );
       console.log(response.data);
       // Si la réponse du serveur est favorable, la transaction a eu lieu
       if (response.data.status === "succeeded") {
+        setIsLoading(false);
         setCompleted(true);
       }
     } catch (error) {
@@ -45,18 +47,21 @@ const CheckoutForm = ({ price, title }) => {
   };
 
   return (
-    <form style={{ width: "300px" }} onSubmit={handleSubmit}>
-      <h1>Formulaire de paiement</h1>
-      <CardElement />
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="cardElement">
+          <CardElement />
+        </div>
 
-      {completed ? (
-        <p>Paiement effectué</p>
-      ) : (
-        <button disabled={isLoading} type="submit">
-          Payer
-        </button>
-      )}
-    </form>
+        {completed ? (
+          <p>Merci pour votre achat</p>
+        ) : (
+          <button disabled={isLoading} type="submit" className="payment-button">
+            Payer
+          </button>
+        )}
+      </form>
+    </div>
   );
 };
 

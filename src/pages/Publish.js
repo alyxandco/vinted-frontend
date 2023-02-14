@@ -221,7 +221,7 @@ const Publish = ({ token }) => {
       </form>
     </div>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/Login" />
   );
 };
 export default Publish;
