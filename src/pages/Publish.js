@@ -44,11 +44,8 @@ const Publish = ({ token }) => {
           },
         }
       );
-      console.log(response);
-      //   setImageToDisplay(response.data);
       if (response.status === 200) {
         navigate("/");
-        console.log("statut : ", response.status);
         // J'affiche une alerte
         alert(`offre enregistrée 👍 !`);
       }
@@ -76,7 +73,6 @@ const Publish = ({ token }) => {
             name="picture"
             type="file"
             onChange={(event) => {
-              // console.log(event.target.files[0]);
               setPicture(event.target.files[0]);
             }}
           />
@@ -213,11 +209,13 @@ const Publish = ({ token }) => {
           </article>
         </section>
         <section className="fifth-section">
-          <button className="publish-button" type="submit">
-            Ajouter
-          </button>
-          {errorMessage && <p className="errorMessage">{errorMessage} </p>}
-        </section>{" "}
+          <div>
+            <button className="publish-button" type="submit">
+              Ajouter
+            </button>
+          </div>
+          {errorMessage && <div className="errorMessage">{errorMessage} </div>}
+        </section>
       </form>
     </div>
   ) : (

@@ -22,7 +22,6 @@ function App() {
   const [token, setToken] = useState(Cookies.get("token-vinted") || null);
   const [search, setSearch] = useState("");
   const [checked, setChecked] = useState(true);
-  console.log(token);
   // fonction pour stocker OU suppr le token dans le state + cookie
   const handleToken = (token) => {
     if (token) {

@@ -13,7 +13,6 @@ const Signup = ({ handleToken }) => {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-    //   console.log(name, email, password, checkedNewsletter);
     //   Je fais disparaitre le message d'erreur
     setErrorMessage("");
     try {
@@ -27,7 +26,6 @@ const Signup = ({ handleToken }) => {
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
         data
       );
-      // console.log(result.data.token);
       if (response.data.token) {
         handleToken(response.data.token);
         navigate("/");

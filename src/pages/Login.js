@@ -11,7 +11,6 @@ const Login = ({ handleToken }) => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    //   console.log(email, password);
     setErrorMessage("");
     try {
       const data = {
@@ -22,11 +21,9 @@ const Login = ({ handleToken }) => {
         "https://lereacteur-vinted-api.herokuapp.com/user/login",
         data
       );
-      console.log(response.data);
       if (response.data.token) {
         //   const cookieToken = response.data.token;
         handleToken(response.data.token);
-        console.log("cookie : ", response.data.token);
         // J'affiche une alerte
         alert(`connecté`);
         navigate("/");
@@ -72,10 +69,10 @@ const Login = ({ handleToken }) => {
           Se connecter
         </button>
         <Link to="/Signup">
-          <p className="newsletter-checkbox-login">
+          <div className="newsletter-checkbox-login">
             {errorMessage && <p className="errorMessage">{errorMessage}</p>}
             Pas encore de compte ? inscris-toi !
-          </p>
+          </div>
         </Link>
       </form>
     </div>

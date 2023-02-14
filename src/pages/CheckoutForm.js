@@ -22,7 +22,7 @@ const CheckoutForm = ({ price, title, name }) => {
       const stripeResponse = await stripe.createToken(cardElement, {
         name: name,
       });
-      console.log(stripeResponse);
+
       const stripeToken = stripeResponse.token.id;
       // Une fois le token reçu depuis l'API Stripe
       // Requête vers notre serveur
@@ -35,7 +35,6 @@ const CheckoutForm = ({ price, title, name }) => {
           amount: price,
         }
       );
-      console.log(response.data);
       // Si la réponse du serveur est favorable, la transaction a eu lieu
       if (response.data.status === "succeeded") {
         setIsLoading(false);
@@ -54,11 +53,17 @@ const CheckoutForm = ({ price, title, name }) => {
         </div>
 
         {completed ? (
-          <p>Merci pour votre achat</p>
+          <div className="payment-completed">Merci pour votre achat</div>
         ) : (
-          <button disabled={isLoading} type="submit" className="payment-button">
-            Payer
-          </button>
+          <div className="payment-completed">
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="payment-button payment-completed"
+            >
+              Payer
+            </button>
+          </div>
         )}
       </form>
     </div>

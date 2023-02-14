@@ -14,12 +14,12 @@ const Payment = () => {
 
   const protectionFee = (price * 10) / 100;
   const protectionFeeToShow = ((price * 10) / 100).toFixed(2);
+
   const expeditionFee = (price * 20) / 100;
   const expeditionFeeToShow = ((price * 20) / 100).toFixed(2);
-  //   console.log(protectionFee);
-  //   console.log(expeditionFee);
+
   const finalPrice = price + protectionFee + expeditionFee;
-  //   console.log(finalPrice);
+
   return (
     <div className="payment-container">
       <section className="payment-section">

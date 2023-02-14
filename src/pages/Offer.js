@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 
-// import Payment from "./Payment";
-
 const Offer = ({ token }) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   const params = useParams();
   const id = params.id;
-  console.log("id : ", id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +17,6 @@ const Offer = ({ token }) => {
         );
         setData(response.data);
         setIsLoading(false);
-        // console.log("response.data : ", response.data);
       } catch (error) {
         console.log(error.message);
       }
@@ -43,12 +39,10 @@ const Offer = ({ token }) => {
         {data.product_details.map((detail, index) => {
           // Je récupère le nom de la clef de detail
           const key = Object.keys(detail)[0];
-          // console.log(key);
-          // console.log(detail[key]);
           return (
             <div key={index}>
               <div className="offer-detail-main">
-                {/* J'affiche le nom dela clef  */}
+                {/* J'affiche le nom de la clef  */}
                 <span className="offer-key">{key} : </span>
                 {/* et son contenu */}
                 <span className="offer-detail">{detail[key]}</span>

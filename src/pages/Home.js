@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-//import du package axios
 import axios from "axios";
 
 import bannerwide from "../components/assets/images/bannerwide.jpg";
@@ -9,6 +8,7 @@ import tear from "../components/assets/images/tear.svg";
 
 const Home = ({ search, setSearch, checked, setChecked, token }) => {
   const [data, setData] = useState();
+
   // State qui me sert à savoir si la data a été récupérée
   const [isLoading, setIsLoading] = useState(true);
   let priceSort = "";
@@ -18,7 +18,7 @@ const Home = ({ search, setSearch, checked, setChecked, token }) => {
   if (!checked) {
     priceSort = "price-asc";
   }
-  // console.log(priceSort);
+
   // La callback de mon useEffect va être appelée une seule fois au premier rendu de mon composant
   useEffect(() => {
     // Je déclare la fonction qui fait la requête
@@ -28,7 +28,7 @@ const Home = ({ search, setSearch, checked, setChecked, token }) => {
         const response = await axios.get(
           `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}&sort=${priceSort}`
         );
-        // console.log(response.data);
+
         // Je stocke le résultat dans data
         setData(response.data);
         // Je fais paser isLoading à false
@@ -72,7 +72,6 @@ const Home = ({ search, setSearch, checked, setChecked, token }) => {
       </div>
       <section className="image-main-container">
         {data.offers.map((offer, index) => {
-          // console.log("offer : ", offer);
           return (
             <Link to={`/offer/${offer._id}`} key={offer._id}>
               <div className="image-single-container">

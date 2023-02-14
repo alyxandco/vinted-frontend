@@ -33,14 +33,12 @@ const Header = ({
             <label>Trier par prix :</label>
             <Toggle
               className="react-toggle-track"
-              // value={checked}
               icons={{
                 checked: <HiArrowUp />,
                 unchecked: <HiArrowDown />,
               }}
               onClick={() => {
                 setChecked(!checked);
-                console.log(checked);
               }}
             />
           </div>

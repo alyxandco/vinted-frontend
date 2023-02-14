@@ -3,10 +3,7 @@ body {
   max-width: 100%;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  font-family: Maison Neue, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: Maison Neue, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
@@ -24,13 +21,13 @@ a:active {
 /* ------------------------*/
 
 .header-container {
-  /* background-color: #acbded; */
   width: 1280px;
   display: flex;
   margin: auto;
   justify-content: space-between;
   padding: 10px 0;
 }
+
 .headerzone1 {
   display: flex;
   justify-content: center;
@@ -44,7 +41,6 @@ header input {
   background-color: #f5f6f7;
   border: none;
   border-radius: 5px;
-  /* font-family: Maison Neue; */
   font-size: 16px;
   height: 37px;
   outline: none;
@@ -80,7 +76,6 @@ header input {
   color: #2cb1ba;
   border: solid 1px #007580;
   border-radius: 5px;
-  /* font-family: Maison Neue; */
   font-size: 12px;
 }
 
@@ -91,7 +86,6 @@ header input {
   color: #ffffff;
   border: solid 1px #c2175b;
   border-radius: 5px;
-  /* font-family: Maison Neue; */
   font-size: 12px;
 }
 
@@ -113,7 +107,6 @@ header input {
 /* ----- xx Banner xx ---- */
 
 .megabanner-container {
-  /* background-color: #9b1b1b; */
   height: 450px;
   width: 100vw;
   margin: 0 auto;
@@ -167,7 +160,6 @@ header input {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* background-color: #f09494; */
   height: 100%;
   width: 1280px;
   margin: 0 auto;
@@ -219,12 +211,11 @@ header input {
   height: 100vh;
   background-color: #ebedee;
   padding-top: 30px;
-  gap: 180px;
+  gap: 130px;
 }
 
 .offer-container img {
-  /* width: 400px; */
-  height: 600px;
+  max-height: 600px;
   object-fit: cover;
 }
 
@@ -288,7 +279,6 @@ header input {
 }
 
 .signup-container form {
-  /* background-color: #f09494; */
   width: 300px;
   text-align: center;
   margin: 30px;
@@ -302,7 +292,6 @@ header input {
   margin-bottom: 20px;
   font-size: 16px;
   height: 37px;
-  /* color: lightgrey; */
 }
 
 h1 {
@@ -335,8 +324,6 @@ h3 {
   width: 30px;
   margin-right: 20px;
   outline: none;
-  /* appearance: auto; */
-  /* box-sizing: border-box; */
   margin: 3px 3px 3px 4px;
   border: solid 3px black;
 }
@@ -358,7 +345,6 @@ h3 {
   background-color: #007580;
   color: #ffffff;
   border: none;
-  /* margin-left: 50px; */
   border-radius: 5px;
   font-size: 16px;
   margin-top: 32px;
@@ -377,7 +363,6 @@ h3 {
   align-items: center;
   justify-content: space-evenly;
   font-size: 16px;
-  /* margin: 0 auto; */
 }
 
 article {
@@ -464,20 +449,17 @@ article textarea {
 }
 
 .checkbox {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 1280px; */
-}
-
-article h3 {
-  /* border: solid 1px black; */
-  /* width: 650px; */
+  text-align: center;
 }
 
 .fifth-section {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   margin-right: 20px;
 }
 
@@ -551,10 +533,8 @@ article h3 {
   background-color: #00bb6a;
   color: #ffffff;
   border: none;
-  /* margin-left: 50px; */
   border-radius: 5px;
   font-size: 16px;
-  /* margin-top: 32px; */
 }
 
 .cardElement {
@@ -562,6 +542,10 @@ article h3 {
   border: solid 1px lightgrey;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.payment-completed {
+  text-align: center;
 }
 
 /* ------------------------*/
