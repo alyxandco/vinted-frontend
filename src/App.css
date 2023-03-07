@@ -426,7 +426,8 @@ article textarea {
 }
 
 .offerToPublishImage {
-  width: 300px;
+  width: 150px;
+  padding-top: 10px;
 }
 
 .second-section {

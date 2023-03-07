@@ -3,7 +3,8 @@ import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 
 const Publish = ({ token }) => {
-  const [picture, setPicture] = useState({});
+  const [picture, setPicture] = useState(null);
+  const [photo, setPhoto] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [brand, setBrand] = useState("");
@@ -35,7 +36,7 @@ const Publish = ({ token }) => {
       formData.append("picture", picture);
 
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        `https://site--vinted-backend--jnfnxpb8s78c.code.run/offer/publish`,
         formData,
         {
           headers: {
@@ -74,15 +75,12 @@ const Publish = ({ token }) => {
             type="file"
             onChange={(event) => {
               setPicture(event.target.files[0]);
+              setPhoto(URL.createObjectURL(event.target.files[0]));
             }}
           />
-          {/* {picture && (
-            <img
-              className="offerToPublishImage"
-              src={URL.createObjectURL(picture)}
-              alt="product"
-            />
-          )} */}
+          {picture && (
+            <img className="offerToPublishImage" src={photo} alt="product" />
+          )}
         </section>
         <section className="publish-container-section second-section">
           <article>

@@ -8,6 +8,8 @@ const Signup = ({ handleToken }) => {
   const [password, setPassword] = useState("");
   const [checkedNewsletter, setCheckedNewsletter] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [picture, setPicture] = useState(null);
+  const [photo, setPhoto] = useState(null);
 
   const navigate = useNavigate();
 
@@ -16,15 +18,20 @@ const Signup = ({ handleToken }) => {
     //   Je fais disparaitre le message d'erreur
     setErrorMessage("");
     try {
-      const data = {
-        email: email,
-        username: name,
-        password: password,
-        newsletter: checkedNewsletter,
-      };
+      const formData = new FormData();
+      formData.append("picture", picture);
+      formData.append("email", email);
+      formData.append("username", name);
+      formData.append("password", password);
+      formData.append("newsletter", checkedNewsletter);
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        data
+        `https://site--vinted-backend--jnfnxpb8s78c.code.run/user/signup`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       if (response.data.token) {
         handleToken(response.data.token);
@@ -81,6 +88,23 @@ const Signup = ({ handleToken }) => {
             setPassword(event.target.value);
           }}
         />
+
+        <label htmlFor="picture" className="custom-file-upload">
+          + Ajoute une photo de profil
+        </label>
+        <input
+          id="picture"
+          name="picture"
+          type="file"
+          onChange={(event) => {
+            setPicture(event.target.files[0]);
+            setPhoto(URL.createObjectURL(event.target.files[0]));
+          }}
+        />
+        {picture && (
+          <img className="offerToPublishImage" src={photo} alt="avatar" />
+        )}
+
         <div className="newsletter-checkbox-container">
           <div>
             <input

@@ -8,12 +8,11 @@ const Offer = ({ token }) => {
 
   const params = useParams();
   const id = params.id;
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
+          `https://site--vinted-backend--jnfnxpb8s78c.code.run/offer/${id}`
         );
         setData(response.data);
         setIsLoading(false);

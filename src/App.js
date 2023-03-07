@@ -13,7 +13,6 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Publish from "./pages/Publish";
 import Payment from "./pages/Payment";
-// import CheckoutForm from "./pages/CheckoutForm";
 
 function App() {
   // State dans lequel je stocke le token. Sa valeur de base sera :

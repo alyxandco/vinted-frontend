@@ -26,7 +26,7 @@ const Home = ({ search, setSearch, checked, setChecked, token }) => {
       // Ma requête peut échouer donc je la place dans un try catch
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers?title=${search}&sort=${priceSort}`
+          `https://site--vinted-backend--jnfnxpb8s78c.code.run/offers?title=${search}&sort=${priceSort}`
         );
 
         // Je stocke le résultat dans data
