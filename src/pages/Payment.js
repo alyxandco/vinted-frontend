@@ -18,7 +18,8 @@ const Payment = () => {
   const expeditionFee = (price * 20) / 100;
   const expeditionFeeToShow = ((price * 20) / 100).toFixed(2);
 
-  const finalPrice = Math.trunc(price + protectionFee + expeditionFee);
+  const resultPrice = price + protectionFee + expeditionFee;
+  const finalPrice = Math.trunc(resultPrice);
   console.log("price", price);
   console.log("protectionFee", protectionFee);
   console.log("expeditionFee", expeditionFee);
