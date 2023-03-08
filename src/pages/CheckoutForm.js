@@ -32,7 +32,7 @@ const CheckoutForm = ({ price, title, name }) => {
         {
           stripeToken: stripeToken,
           title: title,
-          amount: price,
+          amount: price.toFixed(0),
         }
       );
       console.log(response.data);
