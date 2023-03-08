@@ -35,6 +35,7 @@ const CheckoutForm = ({ price, title, name }) => {
           amount: price,
         }
       );
+      console.log(response.data);
       // Si la réponse du serveur est favorable, la transaction a eu lieu
       if (response.data.status === "succeeded") {
         console.log("condition vérifiée");
