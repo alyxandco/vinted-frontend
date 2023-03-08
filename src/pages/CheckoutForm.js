@@ -14,7 +14,7 @@ const CheckoutForm = ({ price, title, name }) => {
     event.preventDefault();
     try {
       setIsLoading(true);
-      // On récupère ici les données bancaires que l'utilisateur rentre
+      // On récupère les données bancaires que l'utilisateur rentre
       const cardElement = elements.getElement(CardElement);
 
       // Demande de création d'un token via l'API Stripe
