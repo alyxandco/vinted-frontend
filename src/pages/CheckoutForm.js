@@ -27,12 +27,14 @@ const CheckoutForm = ({ price, title, name }) => {
       // Une fois le token reçu depuis l'API Stripe
       // Requête vers notre serveur
       // On envoie le token reçu depuis l'API Stripe
+      const newPrice = price * 100;
+
       const response = await axios.post(
         "https://site--vinted-backend--jnfnxpb8s78c.code.run/payment",
         {
           stripeToken: stripeToken,
           title: title,
-          amount: price.toFixed(0),
+          amount: newPrice,
         }
       );
       console.log(response.data);
