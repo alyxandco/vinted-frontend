@@ -30,7 +30,7 @@ const CheckoutForm = ({ price, title, name }) => {
       const response = await axios.post(
         "https://site--vinted-backend--jnfnxpb8s78c.code.run/payment",
         {
-          token: stripeToken,
+          stripetoken: stripeToken,
           title: title,
           amount: price,
         }
